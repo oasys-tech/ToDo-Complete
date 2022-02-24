@@ -13,7 +13,7 @@ function ToDo(props) {
 
   /** 更新イベント */
   const { updateToDoMutation } = useUpdateToDoMutateTask();
-  const useUpdateTodo = (event) => {
+  const eventUpdateTodo = (event) => {
     toDo.title = event.target.value;
     updateToDoMutation.mutate(toDo);
   };
@@ -26,7 +26,7 @@ function ToDo(props) {
         margin="dense"
         defaultValue={props.toDo.title}
         fullWidth
-        onChange={useUpdateTodo}
+        onChange={eventUpdateTodo}
       />
       <CardContent>
         <List>
