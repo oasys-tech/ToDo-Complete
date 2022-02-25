@@ -8,7 +8,7 @@ function ToDo(props) {
   /** 更新用オブジェクト */
   let toDo = {
     id: props.toDo.id,
-    title: "",
+    title: props.toDo.title,
   };
 
   /** 更新イベント */
