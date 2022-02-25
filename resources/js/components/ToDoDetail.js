@@ -9,20 +9,27 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useUpdateToDoDetailMutateTask } from "../hooks/ToDoDetail";
 
 function ToDoDetail(props) {
-    /** 更新用オブジェクト */
-    let toDoDetail = {
-      id: props.detail.id,
-      name: "",
-    };
+  /** 更新用オブジェクト */
+  let toDoDetail = {
+    id: props.detail.id,
+    name: props.detail.name,
+    completed_flag: false,
+  };
 
-    /** 更新イベント */
-    const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
-    const eventUpdateTodoDetail = (event) => {
-      toDoDetail.name = event.target.value;
-      updateToDoDetailMutation.mutate(toDoDetail);
-    };
+  /** 更新イベント */
+  const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
+  const eventUpdateTodoDetail = (event) => {
+    toDoDetail.name = event.target.value;
+    updateToDoDetailMutation.mutate(toDoDetail);
+  };
 
-    /** テンプレート */
+  /** チェックボックス押下イベント */
+  const eventCheckToDoDetail = (event) => {
+    toDoDetail.completed_flag = event.target.checked;
+    updateToDoDetailMutation.mutate(toDoDetail);
+  };
+
+  /** テンプレート */
   return (
     <ListItem
       key={props.detail.id}
@@ -34,15 +41,19 @@ function ToDoDetail(props) {
     >
       <ListItemButton>
         <ListItemIcon>
-          <Checkbox edge="start" />
+          <Checkbox
+            edge="start"
+            defaultChecked={props.detail.completed_flag == 1}
+            onChange={eventCheckToDoDetail}
+          />
         </ListItemIcon>
         <TextField
-        variant="standard"
-        margin="dense"
-        defaultValue={props.detail.name}
-        fullWidth
-        onChange={eventUpdateTodoDetail}
-      />
+          variant="standard"
+          margin="dense"
+          defaultValue={props.detail.name}
+          fullWidth
+          onChange={eventUpdateTodoDetail}
+        />
       </ListItemButton>
     </ListItem>
   );
