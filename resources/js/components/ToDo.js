@@ -9,11 +9,13 @@ import {
 import React from "react";
 import List from "@mui/material/List";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ToDoDetail from "./ToDoDetail";
 import {
   useUpdateToDoMutateTask,
   useDeleteToDoMutateTask,
 } from "../hooks/ToDo";
+import { useStoreToDoDetailMutateTask } from "../hooks/ToDoDetail";
 
 function ToDo(props) {
   /** 更新用オブジェクト */
@@ -38,6 +40,12 @@ function ToDo(props) {
     deleteToDoMutation.mutate(toDo);
   };
 
+  /** ToDoDetail追加イベント */
+  const { storeToDoDetailMutation } = useStoreToDoDetailMutateTask();
+  const eventStoreTodoDetail = (event) => {
+    storeToDoDetailMutation.mutate(toDo);
+  };
+
   /** テンプレート */
   return (
     <Card>
@@ -56,6 +64,9 @@ function ToDo(props) {
         </List>
       </CardContent>
       <CardActions disableSpacing>
+        <IconButton edge="start" aria-label="add" onClick={eventStoreTodoDetail}>
+          <AddCircleIcon />
+        </IconButton>
         <IconButton edge="end" aria-label="delete" onClick={eventDeleteTodo}>
           <DeleteIcon />
         </IconButton>
