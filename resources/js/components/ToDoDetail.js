@@ -22,16 +22,20 @@ function ToDoDetail(props) {
   /** 更新イベント */
   const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
   const eventUpdateTodoDetail = (event) => {
-    toDoDetail.name = event.target.value;
-    toDoDetail.completed_flag = props.detail.completed_flag;
-    updateToDoDetailMutation.mutate(toDoDetail);
+    let data = {
+      ...toDoDetail,
+      name: event.target.value,
+    };
+    updateToDoDetailMutation.mutate(data);
   };
 
   /** チェックボックス押下イベント */
   const eventCheckToDoDetail = (event) => {
-    toDoDetail.name = props.detail.name;
-    toDoDetail.completed_flag = event.target.checked;
-    updateToDoDetailMutation.mutate(toDoDetail);
+    let data = {
+      ...toDoDetail,
+      completed_flag: event.target.checked,
+    };
+    updateToDoDetailMutation.mutate(data);
   };
 
   /** 削除ボタン押下イベント */
@@ -58,7 +62,7 @@ function ToDoDetail(props) {
         <ListItemIcon>
           <Checkbox
             edge="start"
-            defaultChecked={props.detail.completed_flag == 1}
+            checked={props.detail.completed_flag}
             onChange={eventCheckToDoDetail}
           />
         </ListItemIcon>

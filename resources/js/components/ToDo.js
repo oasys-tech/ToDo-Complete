@@ -25,8 +25,11 @@ function ToDo(props) {
   /** 更新イベント */
   const { updateToDoMutation } = useUpdateToDoMutateTask();
   const eventUpdateTodo = (event) => {
-    toDo.title = event.target.value;
-    updateToDoMutation.mutate(toDo);
+    let data = {
+      ...toDo,
+      title: event.target.value,
+    };
+    updateToDoMutation.mutate(data);
   };
 
   /** 削除イベント */
