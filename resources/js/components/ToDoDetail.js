@@ -6,7 +6,10 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useUpdateToDoDetailMutateTask } from "../hooks/ToDoDetail";
+import {
+  useDeleteToDoDetailMutateTask,
+  useUpdateToDoDetailMutateTask,
+} from "../hooks/ToDoDetail";
 
 function ToDoDetail(props) {
   /** 更新用オブジェクト */
@@ -31,12 +34,22 @@ function ToDoDetail(props) {
     updateToDoDetailMutation.mutate(toDoDetail);
   };
 
+  /** 削除ボタン押下イベント */
+  const { deleteToDoDetailMutation } = useDeleteToDoDetailMutateTask();
+  const eventDeleteToDoDetail = (event) => {
+    deleteToDoDetailMutation.mutate(toDoDetail);
+  };
+
   /** テンプレート */
   return (
     <ListItem
       key={props.detail.id}
       secondaryAction={
-        <IconButton edge="end" aria-label="delete">
+        <IconButton
+          edge="end"
+          aria-label="delete"
+          onClick={eventDeleteToDoDetail}
+        >
           <DeleteIcon />
         </IconButton>
       }
