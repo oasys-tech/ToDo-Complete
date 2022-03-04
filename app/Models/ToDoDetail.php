@@ -13,4 +13,9 @@ class ToDoDetail extends Model
     {
         return $this->belongsTo(ToDo::class);
     }
+
+    public function getCompletedFlagAttribute($value)
+    {
+        return $value == 1;
+    }
 }

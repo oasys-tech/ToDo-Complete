@@ -13,18 +13,20 @@ function ToDoDetail(props) {
   let toDoDetail = {
     id: props.detail.id,
     name: props.detail.name,
-    completed_flag: false,
+    completed_flag: props.detail.completed_flag,
   };
 
   /** 更新イベント */
   const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
   const eventUpdateTodoDetail = (event) => {
     toDoDetail.name = event.target.value;
+    toDoDetail.completed_flag = props.detail.completed_flag;
     updateToDoDetailMutation.mutate(toDoDetail);
   };
 
   /** チェックボックス押下イベント */
   const eventCheckToDoDetail = (event) => {
+    toDoDetail.name = props.detail.name;
     toDoDetail.completed_flag = event.target.checked;
     updateToDoDetailMutation.mutate(toDoDetail);
   };
