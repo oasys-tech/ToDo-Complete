@@ -64,7 +64,12 @@ function ToDo(props) {
         </List>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton edge="start" aria-label="add" onClick={eventStoreTodoDetail}>
+        <IconButton
+          edge="start"
+          aria-label="add"
+          color="primary"
+          onClick={eventStoreTodoDetail}
+        >
           <AddCircleIcon />
         </IconButton>
         <IconButton edge="end" aria-label="delete" onClick={eventDeleteTodo}>
