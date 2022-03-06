@@ -4,13 +4,15 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import React from "react";
+import React, { useState } from "react";
 import {
   useDeleteToDoDetailMutateTask,
   useUpdateToDoDetailMutateTask
 } from "../hooks/ToDoDetail";
 
 function ToDoDetail(props) {
+  const [timer, setTimer] = useState(null);
+
   /** 更新用オブジェクト */
   let toDoDetail = {
     id: props.detail.id,
@@ -21,11 +23,17 @@ function ToDoDetail(props) {
   /** 更新イベント */
   const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
   const eventUpdateTodoDetail = (event) => {
-    let data = {
-      ...toDoDetail,
-      name: event.target.value,
-    };
-    updateToDoDetailMutation.mutate(data);
+    clearTimeout(timer);
+
+    const newTimer = setTimeout(() => {
+      let data = {
+        ...toDoDetail,
+        name: event.target.value,
+      };
+      updateToDoDetailMutation.mutate(data);
+    }, 500);
+
+    setTimer(newTimer);
   };
 
   /** チェックボックス押下イベント */

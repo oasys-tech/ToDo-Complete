@@ -8,7 +8,7 @@ import {
   TextField
 } from "@mui/material";
 import List from "@mui/material/List";
-import React from "react";
+import React, { useState } from "react";
 import {
   useDeleteToDoMutateTask,
   useUpdateToDoMutateTask
@@ -17,6 +17,8 @@ import { useStoreToDoDetailMutateTask } from "../hooks/ToDoDetail";
 import ToDoDetail from "./ToDoDetail";
 
 function ToDo(props) {
+  const [timer, setTimer] = useState(null);
+
   /** 更新用オブジェクト */
   let toDo = {
     id: props.toDo.id,
@@ -26,11 +28,17 @@ function ToDo(props) {
   /** 更新イベント */
   const { updateToDoMutation } = useUpdateToDoMutateTask();
   const eventUpdateTodo = (event) => {
-    let data = {
-      ...toDo,
-      title: event.target.value,
-    };
-    updateToDoMutation.mutate(data);
+    clearTimeout(timer)
+
+    const newTimer = setTimeout(() => {
+      let data = {
+        ...toDo,
+        title: event.target.value,
+      };
+        updateToDoMutation.mutate(data);
+    }, 500)
+
+    setTimer(newTimer)
   };
 
   /** 削除イベント */
