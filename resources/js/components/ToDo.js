@@ -1,15 +1,17 @@
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
-    Card,
-    CardActions,
-    CardContent, IconButton,
-    TextField
+  Card,
+  CardActions,
+  CardContent,
+  IconButton,
+  TextField
 } from "@mui/material";
 import List from "@mui/material/List";
 import React from "react";
 import {
-    useDeleteToDoMutateTask, useUpdateToDoMutateTask
+  useDeleteToDoMutateTask,
+  useUpdateToDoMutateTask
 } from "../hooks/ToDo";
 import { useStoreToDoDetailMutateTask } from "../hooks/ToDoDetail";
 import ToDoDetail from "./ToDoDetail";
@@ -53,14 +55,14 @@ function ToDo(props) {
         fullWidth
         onChange={eventUpdateTodo}
       />
-      <CardContent>
+      <CardContent sx={{ p: 0 }}>
         <List>
           {props.toDo.to_do_details.map((detail) => {
             return <ToDoDetail key={detail.id} detail={detail}></ToDoDetail>;
           })}
         </List>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions>
         <IconButton
           edge="start"
           aria-label="add"

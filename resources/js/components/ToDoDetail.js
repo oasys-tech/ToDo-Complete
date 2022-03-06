@@ -6,8 +6,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import React from "react";
 import {
-    useDeleteToDoDetailMutateTask,
-    useUpdateToDoDetailMutateTask
+  useDeleteToDoDetailMutateTask,
+  useUpdateToDoDetailMutateTask
 } from "../hooks/ToDoDetail";
 
 function ToDoDetail(props) {
@@ -56,6 +56,7 @@ function ToDoDetail(props) {
           <DeleteIcon />
         </IconButton>
       }
+      dense={true}
     >
       <ListItemButton>
         <ListItemIcon>
