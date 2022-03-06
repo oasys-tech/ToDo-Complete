@@ -5,13 +5,13 @@ import {
   CardActions,
   CardContent,
   IconButton,
-  TextField
+  TextField,
 } from "@mui/material";
 import List from "@mui/material/List";
 import React, { useState } from "react";
 import {
   useDeleteToDoMutateTask,
-  useUpdateToDoMutateTask
+  useUpdateToDoMutateTask,
 } from "../hooks/ToDo";
 import { useStoreToDoDetailMutateTask } from "../hooks/ToDoDetail";
 import ToDoDetail from "./ToDoDetail";
@@ -28,17 +28,17 @@ function ToDo(props) {
   /** 更新イベント */
   const { updateToDoMutation } = useUpdateToDoMutateTask();
   const eventUpdateTodo = (event) => {
-    clearTimeout(timer)
+    clearTimeout(timer);
 
     const newTimer = setTimeout(() => {
       let data = {
         ...toDo,
         title: event.target.value,
       };
-        updateToDoMutation.mutate(data);
-    }, 500)
+      updateToDoMutation.mutate(data);
+    }, 500);
 
-    setTimer(newTimer)
+    setTimer(newTimer);
   };
 
   /** 削除イベント */
@@ -61,6 +61,9 @@ function ToDo(props) {
         margin="dense"
         defaultValue={props.toDo.title}
         fullWidth
+        inputProps={{
+          style: { fontSize: 20, fontWeight: "bold", paddingLeft: 10 },
+        }}
         onChange={eventUpdateTodo}
       />
       <CardContent sx={{ p: 0 }}>
