@@ -6,7 +6,6 @@ use App\Http\Requests\ToDo\StoreRequest;
 use App\Http\Requests\ToDo\UpdateRequest;
 use App\Models\ToDo;
 use App\Models\ToDoDetail;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ToDoController extends Controller

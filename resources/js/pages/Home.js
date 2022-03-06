@@ -28,7 +28,7 @@ function Home() {
     <div>
       <Grid container spacing={2}>
         {toDoList.map((toDo) => (
-          <Grid item key={toDo.id} xs={3}>
+          <Grid item key={toDo.id} xs={12} sm={6} md={4} xl={3}>
             <ToDo toDo={toDo} />
           </Grid>
         ))}
