@@ -1,25 +1,47 @@
-import { Container, Grid } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { Fab, Grid } from "@mui/material";
 import React from "react";
-import { QueryClient, useQueryClient } from "react-query";
 import ToDo from "../components/ToDo";
+import { useStoreToDoMutateTask } from "../hooks/ToDo";
 import { useCurrentToDoList, useGetToDoList } from "../hooks/ToDoList";
 
-const client = new QueryClient();
+/** スタイル */
+const fabStyle = {
+  position: "fixed",
+  bottom: 16,
+  right: 16,
+};
 
 function Home() {
+  /** ToDo追加イベント */
+  const { storeToDoMutation } = useStoreToDoMutateTask();
+  const eventStoreTodo = (event) => {
+    storeToDoMutation.mutate();
+  };
+
   const { isLoading } = useGetToDoList();
-  const toDoList =  useCurrentToDoList();
+  const toDoList = useCurrentToDoList();
 
   if (isLoading) return "Loading...";
 
   return (
-    <Grid container spacing={2}>
-      {toDoList.map((toDo) => (
-        <Grid item key={toDo.id} xs={3}>
-          <ToDo toDo={toDo} />
-        </Grid>
-      ))}
-    </Grid>
+    <div>
+      <Grid container spacing={2}>
+        {toDoList.map((toDo) => (
+          <Grid item key={toDo.id} xs={3}>
+            <ToDo toDo={toDo} />
+          </Grid>
+        ))}
+      </Grid>
+      <Fab
+        color="primary"
+        aria-label="add"
+        sx={fabStyle}
+        onClick={eventStoreTodo}
+      >
+        <AddIcon />
+      </Fab>
+    </div>
   );
 }
 
