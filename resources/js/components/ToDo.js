@@ -1,21 +1,18 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  IconButton,
-  TextField,
-} from "@mui/material";
-import React from "react";
-import List from "@mui/material/List";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ToDoDetail from "./ToDoDetail";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
-  useUpdateToDoMutateTask,
-  useDeleteToDoMutateTask,
+    Card,
+    CardActions,
+    CardContent, IconButton,
+    TextField
+} from "@mui/material";
+import List from "@mui/material/List";
+import React from "react";
+import {
+    useDeleteToDoMutateTask, useUpdateToDoMutateTask
 } from "../hooks/ToDo";
 import { useStoreToDoDetailMutateTask } from "../hooks/ToDoDetail";
+import ToDoDetail from "./ToDoDetail";
 
 function ToDo(props) {
   /** 更新用オブジェクト */

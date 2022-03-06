@@ -1,13 +1,11 @@
-import { Container, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useGetToDoList } from "../hooks/ToDoList";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../pages/Home";
 import Navigation from "./Navigation";
+
 
 const client = new QueryClient();
 
