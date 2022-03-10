@@ -20,19 +20,21 @@ const useUpdateToDoDetailMutateTask = () => {
         // ToDoリストのキャッシュを更新する
         queryClient.setQueryData("toDoList", (oldToDoList) =>
           oldToDoList.map((oldToDo) => {
-            let newToDoDetails = [];
-            oldToDo.to_do_details.map((oldToDoDetail) => {
-              if (oldToDoDetail.id == toDoDetail.id) {
-                newToDoDetails.push({
-                  ...oldToDoDetail,
-                  name: toDoDetail.name,
-                  completed_flag: toDoDetail.completed_flag,
-                });
-              } else {
-                newToDoDetails.push(oldToDoDetail);
-              }
-            });
-            oldToDo.to_do_details = newToDoDetails;
+            if (oldToDo.id == toDoDetail.to_do_id) {
+              let newToDoDetails = [];
+              oldToDo.to_do_details.map((oldToDoDetail) => {
+                if (oldToDoDetail.id == toDoDetail.id) {
+                  newToDoDetails.push({
+                    ...oldToDoDetail,
+                    name: toDoDetail.name,
+                    completed_flag: toDoDetail.completed_flag,
+                  });
+                } else {
+                  newToDoDetails.push(oldToDoDetail);
+                }
+              });
+              oldToDo.to_do_details = newToDoDetails;
+            }
             return oldToDo;
           })
         );

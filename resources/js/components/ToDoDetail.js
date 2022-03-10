@@ -16,6 +16,7 @@ function ToDoDetail(props) {
   /** 更新用オブジェクト */
   let toDoDetail = {
     id: props.detail.id,
+    to_do_id:props.detail.to_do_id,
     name: props.detail.name,
     completed_flag: props.detail.completed_flag,
   };

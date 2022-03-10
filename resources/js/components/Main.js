@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../pages/Home";
 import Navigation from "./Navigation";
 
-
 const client = new QueryClient();
 
 function Main() {
@@ -20,6 +19,9 @@ function Main() {
               <Route path="/" exact component={Home} />
             </Switch>
           </main>
+          {/*
+          <ReactQueryDevtools></ReactQueryDevtools>
+          */}
         </QueryClientProvider>
       </Router>
     </Box>
