@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useQuery, useQueryClient } from "react-query";
+const { default: axios } = require("axios");
+const { useQueryClient, useQuery } = require("react-query");
 
 const getToDoList = async () => {
   const { data } = await axios.get("/api/toDos");
@@ -10,9 +10,9 @@ const useGetToDoList = () => {
   const queryClient = useQueryClient();
   return useQuery("toDoList", getToDoList, {
     onError: () => {
-      queryClient.setQueryData('toDoList', null);
-    }
+      queryClient.setQueryData("toDoList", null);
+    },
   });
-}
+};
 
 export default useGetToDoList;

@@ -1,29 +1,31 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import { ListItemButton, TextField } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import { Delete } from "@mui/icons-material";
+import {
+  Checkbox,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import {
   useDeleteToDoDetailMutateTask,
-  useUpdateToDoDetailMutateTask
+  useUpdateToDoDetailMutateTask,
 } from "../hooks/ToDoDetail";
 
 function ToDoDetail(props) {
   const [timer, setTimer] = useState(null);
 
-  /** 更新用オブジェクト */
   let toDoDetail = {
     id: props.detail.id,
-    to_do_id:props.detail.to_do_id,
     name: props.detail.name,
     completed_flag: props.detail.completed_flag,
+    to_do_id: props.detail.to_do_id,
   };
 
-  /** 更新イベント */
+  /** 名称更新イベント */
   const { updateToDoDetailMutation } = useUpdateToDoDetailMutateTask();
-  const eventUpdateTodoDetail = (event) => {
+  const eventUpdateToDoDetail = (event) => {
     clearTimeout(timer);
 
     const newTimer = setTimeout(() => {
@@ -36,7 +38,6 @@ function ToDoDetail(props) {
 
     setTimer(newTimer);
   };
-
   /** チェックボックス押下イベント */
   const eventCheckToDoDetail = (event) => {
     let data = {
@@ -45,14 +46,12 @@ function ToDoDetail(props) {
     };
     updateToDoDetailMutation.mutate(data);
   };
-
   /** 削除ボタン押下イベント */
   const { deleteToDoDetailMutation } = useDeleteToDoDetailMutateTask();
   const eventDeleteToDoDetail = (event) => {
     deleteToDoDetailMutation.mutate(toDoDetail);
   };
 
-  /** テンプレート */
   return (
     <ListItem
       key={props.detail.id}
@@ -62,10 +61,10 @@ function ToDoDetail(props) {
           aria-label="delete"
           onClick={eventDeleteToDoDetail}
         >
-          <DeleteIcon />
+          <Delete />
         </IconButton>
       }
-      dense={true}
+      disablePadding
     >
       <ListItemButton>
         <ListItemIcon>
@@ -80,7 +79,7 @@ function ToDoDetail(props) {
           margin="dense"
           defaultValue={props.detail.name}
           fullWidth
-          onChange={eventUpdateTodoDetail}
+          onChange={eventUpdateToDoDetail}
         />
       </ListItemButton>
     </ListItem>
