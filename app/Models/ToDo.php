@@ -11,7 +11,7 @@ class ToDo extends Model
 
     public function toDoDetails()
     {
-        return $this->hasMany(TodoDetail::class);
+        return $this->hasMany(ToDoDetail::class);
     }
  
     public function delete()
