@@ -1,13 +1,14 @@
-import AddIcon from "@mui/icons-material/Add";
+import { Add } from "@mui/icons-material";
 import { Fab, Grid } from "@mui/material";
 import React from "react";
+import ReactDOM from "react-dom";
 import ToDo from "../components/ToDo";
 import { useStoreToDoMutateTask } from "../hooks/ToDo";
 import { useCurrentToDoList, useGetToDoList } from "../hooks/ToDoList";
 
 /** スタイル */
 const fabStyle = {
-  position: "fixed",
+  postion: "fixed",
   bottom: 16,
   right: 16,
 };
@@ -15,20 +16,18 @@ const fabStyle = {
 function Home() {
   /** ToDo追加イベント */
   const { storeToDoMutation } = useStoreToDoMutateTask();
-  const eventStoreTodo = (event) => {
+  const eventstoreToDo = (event) => {
     storeToDoMutation.mutate();
   };
 
   const { isLoading } = useGetToDoList();
   const toDoList = useCurrentToDoList();
-
-  if (isLoading) return "Loading...";
-
+  if (isLoading) return "Now Loading.......";
   return (
     <div>
       <Grid container spacing={2}>
         {toDoList.map((toDo) => (
-          <Grid item key={toDo.id} xs={12} sm={6} md={4} xl={3}>
+          <Grid item key={toDo.id} xs={3}>
             <ToDo toDo={toDo} />
           </Grid>
         ))}
@@ -37,9 +36,9 @@ function Home() {
         color="primary"
         aria-label="add"
         sx={fabStyle}
-        onClick={eventStoreTodo}
+        onClick={eventstoreToDo}
       >
-        <AddIcon />
+        <Add />
       </Fab>
     </div>
   );

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 const useStoreToDoMutateTask = () => {
   const queryClient = useQueryClient();
   const storeToDoMutation = useMutation(
-    () =>
+    (toDo) =>
       axios.post("/api/toDos", {
         title: null,
       }),

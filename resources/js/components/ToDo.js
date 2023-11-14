@@ -1,13 +1,12 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { AddCircle, Delete } from "@mui/icons-material";
 import {
   Card,
   CardActions,
   CardContent,
   IconButton,
+  List,
   TextField,
 } from "@mui/material";
-import List from "@mui/material/List";
 import React, { useState } from "react";
 import {
   useDeleteToDoMutateTask,
@@ -18,18 +17,15 @@ import ToDoDetail from "./ToDoDetail";
 
 function ToDo(props) {
   const [timer, setTimer] = useState(null);
-
-  /** 更新用オブジェクト */
   let toDo = {
     id: props.toDo.id,
     title: props.toDo.title,
   };
 
-  /** 更新イベント */
+  /** 名称更新イベント */
   const { updateToDoMutation } = useUpdateToDoMutateTask();
-  const eventUpdateTodo = (event) => {
+  const eventUpdateToDo = (event) => {
     clearTimeout(timer);
-
     const newTimer = setTimeout(() => {
       let data = {
         ...toDo,
@@ -43,17 +39,16 @@ function ToDo(props) {
 
   /** 削除イベント */
   const { deleteToDoMutation } = useDeleteToDoMutateTask();
-  const eventDeleteTodo = (event) => {
+  const eventDeleteToDo = (event) => {
     deleteToDoMutation.mutate(toDo);
   };
 
   /** ToDoDetail追加イベント */
   const { storeToDoDetailMutation } = useStoreToDoDetailMutateTask();
-  const eventStoreTodoDetail = (event) => {
+  const eventStoreToDoDetail = (event) => {
     storeToDoDetailMutation.mutate(toDo);
   };
 
-  /** テンプレート */
   return (
     <Card>
       <TextField
@@ -61,29 +56,28 @@ function ToDo(props) {
         margin="dense"
         defaultValue={props.toDo.title}
         fullWidth
-        inputProps={{
-          style: { fontSize: 20, fontWeight: "bold", paddingLeft: 10 },
-        }}
-        onChange={eventUpdateTodo}
+        onChange={eventUpdateToDo}
       />
-      <CardContent sx={{ p: 0 }}>
+      <CardContent>
         <List>
           {props.toDo.to_do_details.map((detail) => {
-            return <ToDoDetail key={detail.id} detail={detail}></ToDoDetail>;
+            return <ToDoDetail key={detail.id} detail={detail} />;
           })}
         </List>
       </CardContent>
+
       <CardActions>
         <IconButton
           edge="start"
           aria-label="add"
           color="primary"
-          onClick={eventStoreTodoDetail}
+          onClick={eventStoreToDoDetail}
         >
-          <AddCircleIcon />
+          <AddCircle />
         </IconButton>
-        <IconButton edge="end" aria-label="delete" onClick={eventDeleteTodo}>
-          <DeleteIcon />
+
+        <IconButton edge="end" aria-label="delete" onClick={eventDeleteToDo}>
+          <Delete />
         </IconButton>
       </CardActions>
     </Card>
